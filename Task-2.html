@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Sum Problem</title>
+</head>
+<body>
+
+<h2>Find Two Numbers that Add up to Target</h2>
+
+<!-- Input for array of integers -->
+<label for="inputArray">Enter numbers (comma separated): </label>
+<input type="text" id="inputArray" placeholder="e.g., 2,7,11,15" />
+<br><br>
+
+<!-- Input for target sum -->
+<label for="targetSum">Enter target sum: </label>
+<input type="number" id="targetSum" placeholder="e.g., 9" />
+<br><br>
+
+<!-- Button to trigger the function -->
+<button onclick="findTwoSum()">Find Indices</button>
+
+<!-- Result display -->
+<h3>Result:</h3>
+<p id="result"></p>
+
+<script>
+    function findTwoSum() {
+        // Get the array of numbers from the input
+        const input = document.getElementById("inputArray").value;
+        const target = parseInt(document.getElementById("targetSum").value);
+
+        // Convert the string input into an array of integers
+        const numArray = input.split(',').map(Number);
+
+        // Create a map to store numbers and their indices
+        const numMap = new Map();
+
+        // Loop through the array
+        for (let i = 0; i < numArray.length; i++) {
+            const complement = target - numArray[i];
+
+            // If the complement is found in the map, return the indices
+            if (numMap.has(complement)) {
+                const index1 = numMap.get(complement);
+                const index2 = i;
+                document.getElementById("result").textContent = `Indices: ${index1}, ${index2}`;
+                return;
+            }
+
+            // Add the number and its index to the map
+            numMap.set(numArray[i], i);
+        }
+
+        // If no such numbers are found
+        document.getElementById("result").textContent = "No two numbers add up to the target.";
+    }
+</script>
+
+</body>
+</html>
